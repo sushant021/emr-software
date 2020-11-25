@@ -1,0 +1,41 @@
+{% extends 'backend_base.html' %} {% block content %}
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-sm-6">
+      <h5>Patient List</h5>
+    </div>
+    
+  </div>
+  <div class="article">
+    <table class="table mt-4">
+      <tr>
+        <th>Id</th>
+        <th>Patient Name</th>
+        <th>Gender</th>
+        <th>Age</th>
+        <th></th>
+        <th></th>
+        
+      </tr>
+      {% for patient in patients %}
+      <tr>
+        <td><span>{{patient.id}}</span></td>
+        <td> <a href="{{patient.get_absolute_url }}"> <span>{{patient.full_name}}</span></a></td>
+        <td>
+          {{patient.gender}}
+        </td>
+        <td><span>{{patient.age}}</span></td>
+       
+        <td>
+          <a href="{% url 'update_patient' id=patient.id %}" class="btn btn-primary"><span><i class="fas fa-edit"></i></span></a>
+        
+        </td>
+        <td>
+          <a href="{% url 'delete_patient' id=patient.id %}" class="btn btn-danger"><span><i class="far fa-trash-alt"></i></span></a></a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}

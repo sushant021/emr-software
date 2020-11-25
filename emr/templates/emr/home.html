@@ -1,0 +1,63 @@
+{% extends 'backend_base.html' %}
+
+
+{% block content %}
+  
+  <div class="container py-3 appointment-container">
+
+    
+    <h5> Appointments for Today, {{today_date}}</h5>
+    
+    <div class="article appointment-section">
+        
+        <table class="table homepage-table">
+        <tr>
+            <th>Date and Time</th>
+            <th>Visitor Name</th>
+            <th>Description</th>
+        </tr>
+        
+        {% for appointment in today_appointments %}
+        <tr>
+            <td><a href="{{appointment.get_absolute_url }}"> <span>{{appointment.date_time}}</span></td>
+            <td> <span>{{appointment.visitor_name}}</span></a></td>
+            <td>
+            {{appointment.description}}
+            </td>
+            
+        
+           
+        </tr>
+        {% endfor %}
+        </table>
+    </div>
+
+    <hr/>
+    
+     
+   <h5> Upcoming Appointments</h5>
+    <div class="article appointment-section">
+        <table class="table mt-4">
+        <tr>
+            <th>Date</th>
+            <th>No. of appointments</th>
+        </tr>
+        {% for day in upcoming_days %}
+        <tr>
+            <td><a href="{{day.get_absolute_url }}"> <span>{{day.month}} {{day.number}}</span></td>
+            <td><span>{{day.appointments.count}}</span></a></td>
+            
+              
+        </tr>
+        {% endfor %}
+        </table>
+    </div>
+    
+    
+
+    
+     
+
+    
+  </div>
+{% endblock %}

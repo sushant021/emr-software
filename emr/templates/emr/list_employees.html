@@ -1,0 +1,37 @@
+{% extends 'backend_base.html' %} {% block content %}
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-sm-6">
+      <h5>Employee List</h5>
+    </div>
+    <div class="col-sm-6 text-right">
+      <a href="{% url 'add_employee' %}" class="btn btn-primary"><span>Add New Employee</span></a>
+    </div>
+    
+  </div>
+  <div class="article">
+    <table class="table mt-4">
+      <tr>
+        <th>Id</th>
+        <th>Employee Name</th>
+        <th>Department</th>
+        <th>Designation</th>
+        <th>Contact</th>
+        
+        
+      </tr>
+      {% for employee in employees %}
+      <tr>
+        <td><span>{{employee.id}}</span></td>
+        <td> <a href="{{employee.get_absolute_url }}"> <span>{{employee.full_name}}</span></a></td>
+        <td>  <span>       {{employee.department}} </span>      </td>
+        <td><span>{{employee.designation}}</span></td>
+       
+        <td><span>{{employee.contact_number}}</span></td>
+        
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}

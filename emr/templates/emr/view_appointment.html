@@ -1,0 +1,19 @@
+{% extends "backend_base.html" %} {% block content %}
+<div class="container-fluid py-4">
+    <h2 class="text-center">Appointment Details </h2>
+    <hr>
+    <h5 class="pb-3">Appointment Id: {{appointment.id}} </h5>
+    <p> Appointment Date and Time: {{appointment.date_time}} </p>
+    <p> Visitor Name : {{appointment.visitor_name}} </p>
+    <p> Description : {{appointment.description}} </p>
+
+    <section>
+        <a href="{% url 'update_appointment' id=appointment.id%}" class="btn btn-primary text-center"><span><i class="fas fa-edit"></i> Edit</span></a>
+        <a href="{% url 'delete_appointment' id=appointment.id %}" class="btn btn-danger text-center"><span><i class="far fa-trash-alt"> </i> Delete</span></a></a>
+    </section>
+ 
+</div>
+
+
+
+{% endblock %}

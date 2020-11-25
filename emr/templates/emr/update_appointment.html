@@ -1,0 +1,13 @@
+{% extends "backend_base.html" %} {% load crispy_forms_tags %}
+{% block content%}
+<div class="container py-3">
+  <h4>Update Appointment</h4>
+  <hr />
+  <form action="{% url 'update_appointment' id=appointment.id %}" method="post">
+    {{ form | crispy }} {% csrf_token %}
+    <div class="gap-1"> </div>
+    <input type="submit" name="Save" class="btn btn-primary" />
+  </form>
+</div>
+
+{% endblock %}

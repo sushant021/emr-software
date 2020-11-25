@@ -1,0 +1,40 @@
+{% extends "backend_base.html" %} {% block content %}
+<div class="container-fluid py-4">
+  <h2 class="text-center"> Day: {{day.month}} {{day.number}} </h2>
+  <h5>Appointments list</h5>
+  <table class="table mt-4">
+      <tr>
+        <th>Id</th>
+        <th>Visitor Name</th>
+        <th>Description</th>
+        <th>Date and Time</th>
+        <th></th>
+        <th></th>
+        
+      </tr>
+      {% for appointment in appointments %}
+      <tr>
+        <td><span>{{appointment.id}}</span></td>
+        <td> <a href="{{appointment.get_absolute_url }}"> <span>{{appointment.visitor_name}}</span></a></td>
+        <td>
+          {{appointment.description}}
+        </td>
+        <td><span>{{appointment.date_time}}</span></td>
+       
+        <td>
+          <a href="{% url 'update_appointment' id=appointment.id %}" class="btn btn-primary"><span><i class="fas fa-edit"></i></span></a>
+        
+        </td>
+        <td>
+          <a href="{% url 'delete_appointment' id=appointment.id %}" class="btn btn-danger"><span><i class="far fa-trash-alt"></i></span></a></a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    
+</div>
+
+
+
+{% endblock %}

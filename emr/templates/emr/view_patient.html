@@ -1,0 +1,47 @@
+{% extends "backend_base.html" %} {% block content %}
+<div class="container-fluid py-4">
+<h2 class="text-center"> Patient Details </h2>
+<hr>
+  <div class="row py-4">
+    <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5">
+      <h4 class=" strong"> Patient #{{patient.id}}</h4>
+             
+    </div>
+    <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5" > 
+        <h4 class="strong"> Name: {{patient.full_name}}</h4>
+    </div>
+
+    <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+        <a href="{% url 'update_patient' id=patient.id%}" class="btn btn-primary text-center"><span><i class="fas fa-edit"></i></span></a>
+        <a href="{% url 'delete_patient' id=patient.id %}" class="btn btn-danger text-center"><span><i class="far fa-trash-alt"></i></span></a></a>
+    </div>
+ </div>
+
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <h4 class=" strong"> Personal Information</h4>
+      <p class="lead"> Address: {{patient.address}}</p>
+      <p class="lead"> Contact: {{patient.contact}} </p>
+      <p class="lead"> Gender: {{patient.gender}} </p>
+      <p class = " lead"> Age: {{patient.age}} </p> 
+             
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <h4 class=" strong"> Medical Information </h4>
+      <p class="lead"> Patient History:</p>
+      <p class="lead"> {{patient.medical_history}} </p>
+      
+      <p class="lead"> Initial Diagnosis:</p>
+      <p class="lead"> {{patient.initial_diagnosis}} </p>
+      <p class="lead"> Updated Diagnosis: </p>
+      <p class="lead"> {{patient.updated_diagnosis}}
+      
+             
+    </div>
+</div>
+    
+</div>
+
+
+
+{% endblock %}

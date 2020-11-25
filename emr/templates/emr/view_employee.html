@@ -1,0 +1,27 @@
+{% extends "backend_base.html" %} {% block content %}
+<div class="container-fluid py-4">
+  <h2 class="text-center"> Employee Details </h2>
+  <hr>
+  <div class = "section">
+    <h5>Employee Id: {{employee.id}}</h5>
+    <p>Name: {{employee.full_name}}</p>
+    <p>Department: {{employee.department}} </p>
+    <p>Designation: {{employee.designation}}</p>
+    <p>Phone: {{employee.contact_number}}</p>
+    <p>Address: {{employee.address}}</p>
+    <p>Email: {{employee.email}} </p>
+    <p>Date of Birth: {{employee.date_of_birth}}</p>
+
+    
+  </div>
+  <div class="section">
+    <a href="{% url 'update_employee' id=employee.id%}" class="btn btn-primary text-center"><span><i class="fas fa-edit"></i></span></a>
+    <a href="{% url 'delete_employee' id=employee.id %}" class="btn btn-danger text-center"><span><i class="far fa-trash-alt"></i></span></a></a>
+  </div>
+
+    
+</div>
+
+
+
+{% endblock %}

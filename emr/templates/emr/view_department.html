@@ -1,0 +1,45 @@
+{% extends "backend_base.html" %} {% block content %}
+<div class="container-fluid py-4">
+  <h2 class="text-center"> Department Details </h2>
+  <hr>
+  <div class = "section">
+    <h5>Department Id: {{department.id}}</h5>
+    <p>Name: {{department.name}}</p>
+    <p>Total Employees: {{department.employees.count}}</p>
+    
+  </div>
+
+  <div class="section">
+    <h5>Department Employees </h5>
+    <table class="table mt-4">
+      <tr>
+        <th>Id</th>
+        <th>Employee Name</th>
+       <th>Designation</th>
+        <th>Contact</th>
+        
+        
+      </tr>
+      {% for employee in department.employees.all %}
+      <tr>
+        <td><span>{{employee.id}}</span></td>
+        <td> <a href="{{employee.get_absolute_url }}"> <span>{{employee.full_name}}</span></a></td>
+        <td><span>{{employee.designation}}</span></td>
+        <td><span>{{employee.contact_number}}</span></td>
+        
+      </tr>
+      {% endfor %}
+    </table>
+    
+  </div>
+  <div class="section">
+    <a href="{% url 'update_department' id=department.id%}" class="btn btn-primary text-center"><span><i class="fas fa-edit"></i></span></a>
+    <a href="{% url 'delete_department' id=department.id %}" class="btn btn-danger text-center"><span><i class="far fa-trash-alt"></i></span></a></a>
+  </div>
+
+    
+</div>
+
+
+
+{% endblock %}
