@@ -37,7 +37,7 @@
      
    <h5> Upcoming Appointments</h5>
     <div class="article appointment-section">
-        <table class="table mt-4">
+        {% comment %} <table class="table mt-4">
         <tr>
             <th>Date</th>
             <th>No. of appointments</th>
@@ -50,7 +50,29 @@
               
         </tr>
         {% endfor %}
-        </table>
+        </table> {% endcomment %}
+       
+            <div class="my-grid">
+            {% for day in upcoming_days %}
+
+                <div class="grid-item">
+                    <div class="card text-center" >
+                        <div class="card-header">
+                            <span>{{day.week_day}}</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{day.month}} {{day.number}}</h5>
+                            <a href="{{day.get_absolute_url}}"><span>{{day.appointments.count}} Appt.</span></a>
+                        </div>
+                        </div>
+                </div>
+            {% endfor %}
+
+            </div>
+
+       
+
+
     </div>
     
     

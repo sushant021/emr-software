@@ -209,3 +209,15 @@ body {
   padding:0 1em;
   overflow-y: scroll;
 }
+
+/* scheduling each date */
+.my-grid{
+  
+  display: flex;
+  flex-wrap: wrap;
+}
+.grid-item{
+  
+  width:13.6%;
+  margin:0.2em;
+}
