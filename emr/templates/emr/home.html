@@ -1,4 +1,5 @@
 {% extends 'backend_base.html' %}
+{% load custom_filters %}
 
 
 {% block content %}
@@ -35,7 +36,7 @@
     <hr/>
     
      
-   <h5> Upcoming Appointments</h5>
+   <h5 class="text-center"> Upcoming Appointments</h5>
     <div class="article appointment-section">
         {% comment %} <table class="table mt-4">
         <tr>
@@ -62,24 +63,14 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{day.month}} {{day.number}}</h5>
-                            <a href="{{day.get_absolute_url}}"><span>{{day.appointments.count}} Appt.</span></a>
+                            <a href="{{day.get_absolute_url}}"><span>{{day.appointments | appointment_count:request.user }} Appt.</span></a>
                         </div>
                         </div>
                 </div>
             {% endfor %}
 
             </div>
-
-       
-
-
     </div>
-    
-    
 
-    
-     
-
-    
   </div>
 {% endblock %}

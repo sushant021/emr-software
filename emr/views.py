@@ -15,6 +15,7 @@ def user_logout(request):
     return redirect('/')
 
 
+@login_required
 def search_patients(request):
     message = ''
     error = ''
@@ -39,16 +40,19 @@ def search_patients(request):
         return render(request, 'emr/search_patient.html')
 
 
+@login_required
 def list_patients(request):
     patients = Patient.objects.all()
     return render(request, 'emr/list_patients.html', {'patients': patients})
 
 
+@login_required
 def view_patient(request, id):
     patient = Patient.objects.get(id=id)
     return render(request, 'emr/view_patient.html', {'patient': patient})
 
 
+@login_required
 def add_patient(request):
     if request.method == 'POST':
         form = PatientForm(request.POST)
@@ -63,12 +67,14 @@ def add_patient(request):
         return render(request, 'emr/add_patient.html', {'form': form})
 
 
+@login_required
 def delete_patient(request, id):
     patient = Patient.objects.get(id=id)
     patient.delete()
     return redirect('list_patients')
 
 
+@login_required
 def update_patient(request, id):
     template = 'emr/update_patient.html'
     patient = Patient.objects.get(id=id)
@@ -108,7 +114,7 @@ def home(request):
 
     today = date.today()
     today_date = today.strftime("%B %d, %Y")
-    appointments = Appointment.objects.all()
+    appointments = Appointment.objects.filter(user=request.user)
     for appointment in appointments:
         appointment_date = appointment.date_time
         appointment_date_formatted = appointment_date.strftime("%B %d, %Y")
@@ -130,16 +136,19 @@ def home(request):
     return render(request, template, context)
 
 
+@login_required
 def view_day(request, id):
     day = Day.objects.get(id=id)
-    appointments = day.appointments.all()
+    appointments = day.appointments.filter(user=request.user)
     return render(request, 'emr/view_day.html', {'day': day, 'appointments': appointments})
 
 
+@login_required
 def index(request):
     return HttpResponse('Hello world !')
 
 
+@login_required
 def add_appointment(request):
     if request.method == 'POST':
         form = AppointmentForm(request.POST)
@@ -154,11 +163,13 @@ def add_appointment(request):
         return render(request, 'emr/add_appointment.html', {'form': form})
 
 
+@login_required
 def list_appointments(request):
-    appointments = Appointment.objects.all()
+    appointments = Appointment.objects.filter(user=request.user)
     return render(request, 'emr/list_appointments.html', {'appointments': appointments})
 
 
+@login_required
 def view_appointment(request, id):
     appointment = Appointment.objects.get(id=id)
     template = 'emr/view_appointment.html'
@@ -166,12 +177,14 @@ def view_appointment(request, id):
     return render(request, template, context)
 
 
+@login_required
 def delete_appointment(request, id):
     appointment = Appointment.objects.get(id=id)
     appointment.delete()
     return redirect('list_appointments')
 
 
+@login_required
 def update_appointment(request, id):
     template = 'emr/update_appointment.html'
     appointment = Appointment.objects.get(id=id)
@@ -184,17 +197,19 @@ def update_appointment(request, id):
 
 
 # employee views
-
+@login_required
 def list_employees(request):
     employees = Employee.objects.all()
     return render(request, 'emr/list_employees.html', {'employees': employees})
 
 
+@login_required
 def view_employee(request, id):
     employee = Employee.objects.get(id=id)
     return render(request, 'emr/view_employee.html', {'employee': employee})
 
 
+@login_required
 def add_employee(request):
     if request.method == 'POST':
         form = EmployeeForm(request.POST)
@@ -209,12 +224,14 @@ def add_employee(request):
         return render(request, 'emr/add_employee.html', {'form': form})
 
 
+@login_required
 def delete_employee(request, id):
     employee = Employee.objects.get(id=id)
     employee.delete()
     return redirect('list_employees')
 
 
+@login_required
 def update_employee(request, id):
     template = 'emr/update_employee.html'
     employee = Employee.objects.get(id=id)

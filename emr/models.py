@@ -84,7 +84,8 @@ class Day(models.Model):
 
 
 class Appointment(models.Model):
-
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='appointments', default=1)
     id = models.AutoField(primary_key=True)
     visitor_name = models.CharField(max_length=254, blank=True)
     description = models.TextField(blank=True)
