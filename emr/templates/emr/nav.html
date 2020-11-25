@@ -1,14 +1,19 @@
-
+{% load custom_filters %}
 <ul class="nav-list p-0">
     <li class="nav-list-item">
         <a href="{% url 'home' %}" class=" font-black pl-4 letter-spacing-05">Home</a>
     </li>
+
+    {% if request.user|has_group:"Owners" %}
     <li class="nav-list-item">
         <a href="{% url 'list_employees'%}" class=" font-black pl-4 letter-spacing-05">Employees</a>
     </li>
       <li class="nav-list-item">
         <a href="{% url 'list_departments'%}" class=" font-black pl-4 letter-spacing-05">Departments</a>
     </li>
+    {% endif %}
+
+    {% if request.user|has_group:"Doctors and Nurses" or request.user|has_group:"Owners" %}
     <li class="nav-list-item">
         <a href="{% url 'list_appointments' %}" class=" font-black pl-4 letter-spacing-05">Appointments</a>
     </li>
@@ -18,13 +23,17 @@
     <li class="nav-list-item">
         <a href="{% url 'list_patients'%}" class=" font-black pl-4 letter-spacing-05">List Patients</a>
     </li>
+     <li class="nav-list-item">
+            <a href="{% url 'search_patient' %}" class=" font-black pl-4 letter-spacing-05">Look Up Patient</a>
+    </li>
+    {% endif %}
 
+    {% if request.user|has_group:"Administration" or request.user|has_group:"Owners"  %}
     <li class="nav-list-item">
             <a href="{% url 'add_patient' %}" class=" font-black pl-4 letter-spacing-05">Add New Patient</a>
     </li> 
-    <li class="nav-list-item">
-            <a href="{% url 'search_patient' %}" class=" font-black pl-4 letter-spacing-05">Look Up Patient</a>
-    </li> 
+    {% endif %}
+    
 
     <li class="nav-list-item">
             <a href="{% url 'logout' %}" class=" font-black pl-4 letter-spacing-05">Logout</a>
