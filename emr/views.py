@@ -23,11 +23,18 @@ def search_patients(request):
         patient_name = request.POST.get('name')
         patient_id = request.POST.get('id')
         if len(str(patient_id)) != 0:
-            patient = get_object_or_404(Patient, id=patient_id)
-            return render(request, 'emr/search_patient.html', {'patient': patient, 'text': 'hello'})
+            try:
+                patient = Patient.objects.get(id=patient_id)
+            except Patient.DoesNotExist:
+                patient = None
+                error = "No patient found !"
+            return render(request, 'emr/search_patient.html', {'patient': patient, 'error': error})
         elif len(patient_name) != 0:
             patients = Patient.objects.filter(full_name__contains=patient_name)
-            return render(request, 'emr/search_patient.html', {'patients': patients})
+            if len(patients) == 0:
+                patients = None
+                error = "No patient found !"
+            return render(request, 'emr/search_patient.html', {'patients': patients, 'error': error})
         else:
             message = 'Please provide a patient name or id.'
             return render(request, 'emr/search_patient.html', {'message': message})
@@ -244,16 +251,19 @@ def update_employee(request, id):
 
 
 # department views
+@login_required
 def list_departments(request):
     departments = Department.objects.all()
     return render(request, 'emr/list_departments.html', {'departments': departments})
 
 
+@login_required
 def view_department(request, id):
     department = Department.objects.get(id=id)
     return render(request, 'emr/view_department.html', {'department': department})
 
 
+@login_required
 def add_department(request):
     if request.method == 'POST':
         form = DepartmentForm(request.POST)
@@ -268,12 +278,14 @@ def add_department(request):
         return render(request, 'emr/add_department.html', {'form': form})
 
 
+@login_required
 def delete_department(request, id):
     department = Department.objects.get(id=id)
     department.delete()
     return redirect('list_departments')
 
 
+@login_required
 def update_department(request, id):
     template = 'emr/update_department.html'
     department = Department.objects.get(id=id)
@@ -282,4 +294,34 @@ def update_department(request, id):
         form.save()
         return redirect('list_departments')
     context = {"form": form, 'department': department}
+    return render(request, template, context)
+
+
+@login_required
+def calendar(request):
+    today_appointments = []
+    day_dates = {}
+    upcoming_days = []
+
+    today = date.today()
+    today_date = today.strftime("%B %d, %Y")
+    appointments = Appointment.objects.filter(user=request.user)
+    for appointment in appointments:
+        appointment_date = appointment.date_time
+        appointment_date_formatted = appointment_date.strftime("%B %d, %Y")
+        if appointment_date_formatted == today_date:
+            today_appointments.append(appointment)
+
+    days = Day.objects.all()
+    for day in days:
+        day_date = datetime.date(2020, day.month_number, day.number)
+        day_dates[day] = day_date
+
+    for day, day_date in day_dates.items():
+        if day_date > date.today():
+            upcoming_days.append(day)
+
+    context = {'today_date': today_date,
+               'today_appointments': today_appointments, 'upcoming_days': upcoming_days}
+    template = 'emr/calendar.html'
     return render(request, template, context)

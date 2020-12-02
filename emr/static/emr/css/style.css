@@ -64,6 +64,9 @@ body {
   border-radius: 0 !important;
 }
 /* gap */
+.gap{
+  display: block;
+}
 .gap-1 {
   height: 1em;
 }
@@ -228,3 +231,4 @@ body {
   width:13.6%;
   margin:0.2em;
 }
+

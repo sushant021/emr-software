@@ -25,6 +25,8 @@ class EmployeeForm(ModelForm):
 
 
 class DepartmentForm(ModelForm):
+    # class Media:
+    #     js = ('confirms.js',)
     class Meta:
         model = Department
         fields = '__all__'

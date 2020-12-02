@@ -15,17 +15,12 @@
         <th>Department Id</th>
         <th>Department Name</th>
         <th>No. of Employees</th>
-        
-        
-        
-      </tr>
+       </tr>
       {% for department in departments %}
       <tr>
         <td>  <span>       {{department.id}} </span>      </td>
         <td> <a href="{{department.get_absolute_url }}"> <span>{{department.name}}</span></a></td>
         <td>  <span>       {{department.employees.count}} </span>      </td>
-        
-        
       </tr>
       {% endfor %}
     </table>

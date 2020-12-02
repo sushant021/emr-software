@@ -9,7 +9,7 @@
 
     <section>
         <a href="{% url 'update_appointment' id=appointment.id%}" class="btn btn-primary text-center"><span><i class="fas fa-edit"></i> Edit</span></a>
-        <a href="{% url 'delete_appointment' id=appointment.id %}" class="btn btn-danger text-center"><span><i class="far fa-trash-alt"> </i> Delete</span></a></a>
+        <a href="{% url 'delete_appointment' id=appointment.id %}" class="btn btn-danger text-center" onclick = "return confirm('Do you really want to delete ?')"><span><i class="far fa-trash-alt"> </i> Delete</span></a></a>
     </section>
  
 </div>

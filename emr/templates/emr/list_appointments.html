@@ -31,7 +31,7 @@
         
         </td>
         <td>
-          <a href="{% url 'delete_appointment' id=appointment.id %}" class="btn btn-danger"><span><i class="far fa-trash-alt"></i></span></a></a>
+          <a href="{% url 'delete_appointment' id=appointment.id %}" class="btn btn-danger" onclick = "return confirm('Do you really want to delete ?')"><span><i class="far fa-trash-alt"></i></span></a></a>
         </td>
       </tr>
       {% endfor %}

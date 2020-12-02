@@ -8,18 +8,8 @@ urlpatterns = [
 
     # authentication
     #    path('', views.user_login, name='login'),
-    #     path('logout/', views.user_logout, name='logout'),
+    #    path('logout/', views.user_logout, name='logout'),
     path('accounts/', include('django.contrib.auth.urls')),
-
-
-    #     # password_reset_views
-    #     path('accounts/password_change/', name='password_change'),
-    #     path('accounts/password_change/done/', name='password_change_done'),
-    #     path('accounts/password_reset/', name='password_reset'),
-    #     path('accounts/password_reset/done/', name='password_reset_done'),
-    #     path('accounts/reset/<uidb64>/<token>/', name='password_reset_confirm'),
-    #     path('accounts/reset/done/', name='password_reset_complete'),
-
 
     # day
     path('day/<int:id>/', views.view_day, name='view_day'),
@@ -61,7 +51,8 @@ urlpatterns = [
     path('department/update/<int:id>/',
          views.update_department, name='update_department'),
 
-
+    # calendar
+    path('calendar/', views.calendar, name='calendar')
 
 
 

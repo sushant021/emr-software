@@ -13,7 +13,7 @@
 
     <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
         <a href="{% url 'update_patient' id=patient.id%}" class="btn btn-primary text-center"><span><i class="fas fa-edit"></i></span></a>
-        <a href="{% url 'delete_patient' id=patient.id %}" class="btn btn-danger text-center"><span><i class="far fa-trash-alt"></i></span></a></a>
+        <a href="{% url 'delete_patient' id=patient.id %}" class="btn btn-danger text-center" onclick = "return confirm('Do you really want to delete ?')"><span><i class="far fa-trash-alt"></i></span></a></a>
     </div>
  </div>
 

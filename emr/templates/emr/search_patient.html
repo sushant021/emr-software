@@ -1,48 +1,55 @@
 {% extends 'backend_base.html' %}
 {% block content %}
 
-<div class="container text-center py-2">
+
+<div class="container  py-2">
+    <h5> Find a Patient </h5>
+    
     <form action='/search-patient/' method="POST">
         {% csrf_token %}
-               
-        <label for= "patientId"> Id</label>
-        <input type = "number" name="id" class="id-search-bar" id="patientId">
+        <div class="row">
+            <div class="col">
+                <div class="form-group"> 
+                    <label for= "patientId"> Id</label>
+                    <input type = "number" name="id" class="form-control" id="patientId">
+                </div>
+            </div>
 
-        <label for="patientName"> Name </label>
-        <input type="text" name="name" class="name-search-bar" id="patientName"> 
+            <div class="col">
+                <div class="form-group">
+                    <label for="patientName"> Name </label>
+                    <input type="text" name="name" class="form-control" id="patientName"> 
+                </div>
+            </div>
+            <div class="col">
+                <input type="submit" value="Search" class="btn emr-btn" style="margin-top: 32px;"> 
+            </div>
+        </div>
+         
         
-        <input type="submit" value="Search" class="btn emr-btn">
     
     </form>
 </div>
 
+<div class= "container">
     {% if message %}
-        {{message}}
+    <p class="alert alert-warning" role="alert">{{message}} </p>     
     {% endif %}
-
     {% if error %}
-            {{error}}
+    <p class="alert alert-danger" role="alert">{{error}} </p>     
     {% endif %}
+</div>
 
-    {% if patient %}
-        
-    <div class="container-fluid py-4">
-      <div class="row">
-        <div class="col-sm-6">
-        <h5>Patient List</h5>
-        </div>
-        
-    </div>
+{% if patient %}
+<div class="container py-4">
+    <h5> Patients Found </h5>
     <div class="article">
         <table class="table mt-4">
         <tr>
             <th>Id</th>
             <th>Patient Name</th>
             <th>Gender</th>
-            <th>Age</th>
-            <th></th>
-            <th></th>
-            
+            <th>Age</th>            
         </tr>
         
         <tr>
@@ -52,62 +59,10 @@
             {{patient.gender}}
             </td>
             <td><span>{{patient.age}}</span></td>
-        
-            <td>
-            <a href="{% url 'update_patient' id=patient.id %}" class="btn btn-primary"><span><i class="fas fa-edit"></i></span></a>
-            
-            </td>
-            <td>
-            <a href="{% url 'delete_patient' id=patient.id %}" class="btn btn-danger"><span><i class="far fa-trash-alt"></i></span></a></a>
-            </td>
         </tr>
         
         </table>
     </div>
-  </div>
-    {% endif %}
-
-    {% if patients %}
-
-    <div class="container-fluid py-4">
-      <div class="row">
-        <div class="col-sm-6">
-        <h5>Patient List</h5>
-        </div>
-        
-    </div>
-    <div class="article">
-        <table class="table mt-4">
-        <tr>
-            <th>Id</th>
-            <th>Patient Name</th>
-            <th>Gender</th>
-            <th>Age</th>
-            <th></th>
-            <th></th>
-            
-        </tr>
-        {% for patient in patients %}
-        <tr>
-            <td><span>{{patient.id}}</span></td>
-            <td> <a href="{{patient.get_absolute_url }}"> <span>{{patient.full_name}}</span></a></td>
-            <td>
-            {{patient.gender}}
-            </td>
-            <td><span>{{patient.age}}</span></td>
-        
-            <td>
-            <a href="{% url 'update_patient' id=patient.id %}" class="btn btn-primary"><span><i class="fas fa-edit"></i></span></a>
-            
-            </td>
-            <td>
-            <a href="{% url 'delete_patient' id=patient.id %}" class="btn btn-danger"><span><i class="far fa-trash-alt"></i></span></a></a>
-            </td>
-        </tr>
-        {% endfor %}
-        </table>
-    </div>
-    </div>
-
-    {% endif %}
+</div>
+{% endif %}
 {% endblock %}
