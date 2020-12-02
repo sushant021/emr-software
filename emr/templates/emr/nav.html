@@ -13,7 +13,7 @@
     </li>
     {% endif %}
 
-    {% if request.user|has_group:"Doctors and Nurses" or request.user|has_group:"Owners" %}
+    
     <li class="nav-list-item">
         <a href="{% url 'list_appointments' %}" class=" font-black pl-4 letter-spacing-05">Appointments</a>
     </li>
@@ -26,13 +26,13 @@
      <li class="nav-list-item">
             <a href="{% url 'search_patient' %}" class=" font-black pl-4 letter-spacing-05">Look Up Patient</a>
     </li>
-    {% endif %}
+    
 
-    {% if request.user|has_group:"Administration" or request.user|has_group:"Owners"  %}
+    
     <li class="nav-list-item">
             <a href="{% url 'add_patient' %}" class=" font-black pl-4 letter-spacing-05">Add New Patient</a>
     </li> 
-    {% endif %}
+   
     
 
     <li class="nav-list-item">

@@ -11,8 +11,23 @@
       <p class="caption-head mb-0" >New Life Clinic</p>
       <p class="caption-head" id="loginTitle"> EMR Login </p>
         <form method="post" action=".">
+        
           {% csrf_token %}
-          {{form.non_field_errors}}
+          <div class="error container">
+            
+            
+              {% for error in form.non_field_errors %}
+              <div class="alert alert-danger" role="alert">
+                <p>{{error}} </p>
+              </div>
+              {% endfor %}
+           
+            
+          </div>
+
+          
+
+          
           <div class="username-section p-2">
             {{form.username}}
           </div>

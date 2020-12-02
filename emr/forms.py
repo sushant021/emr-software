@@ -2,6 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from .models import Patient, Appointment, Employee, Department
 from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class LoginForm(forms.Form):

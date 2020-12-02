@@ -2,12 +2,15 @@ from django.urls import path, include
 from emr import views
 from django.contrib.auth import views as auth_views
 
+
 urlpatterns = [
-    path('home/', views.home, name='home'),
+    path('', views.home, name='home'),
 
     # authentication
-    path('', views.user_login, name='login'),
-    path('logout/', views.user_logout, name='logout'),
+    #    path('', views.user_login, name='login'),
+    #     path('logout/', views.user_logout, name='logout'),
+    path('accounts/', include('django.contrib.auth.urls')),
+
 
     #     # password_reset_views
     #     path('accounts/password_change/', name='password_change'),
@@ -40,7 +43,7 @@ urlpatterns = [
 
     # employee_crud
     path('employees/', views.list_employees, name='list_employees'),
-    #path('search-employee/', views.search_employees, name='search_employee'),
+    # path('search-employee/', views.search_employees, name='search_employee'),
     path('employee/add/', views.add_employee, name='add_employee'),
     path('employee/<int:id>/', views.view_employee, name='view_employee'),
     path('employee/delete/<int:id>/',
@@ -50,7 +53,7 @@ urlpatterns = [
 
     # department_crud
     path('departments/', views.list_departments, name='list_departments'),
-    #path('search-department/', views.search_departments, name='search_department'),
+    # path('search-department/', views.search_departments, name='search_department'),
     path('department/add/', views.add_department, name='add_department'),
     path('department/<int:id>/', views.view_department, name='view_department'),
     path('department/delete/<int:id>/',

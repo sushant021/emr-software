@@ -157,7 +157,14 @@ body {
     top: 10%;
 }
 /* login form fields */
-.username-field, .password-field{
+/* .username-field, .password-field{
+  width:350px;
+  padding:0.5em;
+  background-color:rgba(0,0,0,0.1);
+  border-color: rgba(256,256,256,256);
+  border-style: hidden;
+} */
+.username-section> input , .password-section>input{
   width:350px;
   padding:0.5em;
   background-color:rgba(0,0,0,0.1);
